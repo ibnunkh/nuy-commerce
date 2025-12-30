@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +9,8 @@ import toast from "react-hot-toast";
 import api from "@/lib/api/axios";
 import { useCartStore } from "@/store/useCartStore";
 
-export default function ProductsPage() {
+// Komponen terpisah untuk handle search params
+function ProductsList() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search");
 
@@ -220,5 +221,23 @@ export default function ProductsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+// Main component dengan Suspense
+export default function ProductsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 mx-auto mb-4"></div>
+            <p className="text-foreground">Loading...</p>
+          </div>
+        </div>
+      }
+    >
+      <ProductsList />
+    </Suspense>
   );
 }
