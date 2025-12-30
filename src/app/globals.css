@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f2f8fc;
+  --color-foreground: #232325;
+  --color-primary: #232325;
+  --color-secondary: #f2f8fc; 
+}
+
+@utility font-poppins {
+  font-family: var(--font-poppins);
+}
+
+@utility font-roboto {
+  font-family: var(--font-roboto);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-roboto);
+}
